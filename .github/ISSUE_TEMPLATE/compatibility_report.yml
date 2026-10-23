@@ -1,32 +1,25 @@
-name: Compatibility report
-description: Report reproducible results for a specific Arc build.
+name: Compatibility & Version Support
+description: Request support or share test results for an Arc build.
 title: '[Compatibility] '
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Please distinguish actual browser observations from harness tests. Do not upload browser profiles, personal authentication state, or Arc binaries.
   - type: input
     id: environment
     attributes:
-      label: macOS version, CPU architecture, SIP state, and Arc Forever revision
+      label: macOS version & chip
+      placeholder: e.g. macOS 15.7 (Apple Silicon)
     validations:
       required: true
   - type: input
     id: arc-build
     attributes:
-      label: Arc version, build, and executable SHA-256
+      label: Arc version & build
+      placeholder: e.g. Arc 1.170.0 (89123)
     validations:
       required: true
   - type: textarea
-    id: checks
+    id: details
     attributes:
-      label: Observed checks and results
-      description: Include the strategy (framework or main) and results for launch, navigation, Spaces/tabs, restart persistence, fixture sessions/passwords, apply, and restore. Mark untested items explicitly.
+      label: Details
+      description: Share output from `python3 arc_forever.py status` or your test results.
     validations:
       required: true
-  - type: textarea
-    id: limitations
-    attributes:
-      label: Errors or limitations
-      description: Include only redacted diagnostic output and reproducible steps.

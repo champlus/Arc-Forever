@@ -1,60 +1,46 @@
-# Arc Forever
+# Arc Forever — 让 Arc 浏览器在停服后继续使用（macOS 离线 / 免云端验证）
 
-**让 Arc 浏览器在官方账户停用后仍可在 macOS 上继续本地使用。**
+**在官方停服与账号下线后，继续在 macOS 上永久使用你的 Arc 浏览器——支持离线运行，完整保留所有 Spaces、置顶标签、扩展与个人配置。**
 
-Arc Forever 是一个轻量级、可逆的原地补丁工具。它通过在本地提供认证支持，让已登录的 Arc 浏览器摆脱对官方账号服务器的依赖，完整保留现有的 Spaces、标签页、收藏夹与浏览器配置。
+[English](README.md) · [兼容性说明](docs/compatibility.md) · [技术原理](docs/architecture.md)
 
-[English](README.md) · [兼容性说明](docs/compatibility.md) · [技术原理](docs/architecture.md) · [Arc 官方公告](https://arc.net/)
+## 核心特性
 
-## 特性
-
-- **原地修改，随时恢复**：直接作用于已安装的 Arc.app，自动备份关键文件，可随时一键完整恢复。
-- **保留完整配置与界面**：不更改 Bundle ID、应用名称或数据目录，Spaces、置顶标签、扩展及历史记录均在原处。
-- **本地身份保持**：阻止远程下线请求，在服务关闭后依然能以离线身份正常启动并浏览网页。
-- **支持默认 SIP 环境**：适用于标准 macOS 系统安全配置，无需关闭系统完整性保护（SIP）。
+- **告别停服与强制退出**：接管本地身份验证，移除远程账号过期与强制下线限制，让 Arc 在停服后依然能正常启动和浏览。
+- **完整保留工作流**：直接作用于现有的 `Arc.app`，你的 Spaces、收藏夹、历史记录、已安装扩展与个人配置原封不动。
+- **原生体验，一键可逆**：自动备份原始文件，支持随时一键恢复至修改前状态，兼容标准 macOS 环境（Apple Silicon & Intel）。
+- **侧边栏书签导出**：内置独立导出工具，无需启动浏览器即可将所有 Spaces 和置顶标签导出为标准 HTML 书签或 JSON。
 
 ## 快速开始
 
-### 前提条件
-- macOS
-- Python 3 与 Command Line Tools（可在终端运行 `xcode-select --install` 安装）
-- 本地已有登录过账号的 Arc 浏览器（操作前请先退出 Arc）
+确保系统已安装 Python 3 与 Xcode Command Line Tools（终端运行 `xcode-select --install`），并在操作前退出 Arc。
 
-### 使用方法
+### 方式一：双击交互运行（推荐）
+下载仓库后，在 Finder 中双击打开 [`Arc Forever.command`](Arc%20Forever.command)，在终端菜单中按数字选择即可完成激活、状态检查或恢复。
 
-**方式一：双击运行**
-下载或克隆仓库后，在 Finder 中双击打开 [Arc Forever.command](Arc%20Forever.command)，按照终端菜单选择应用、恢复或查看状态。
-
-**方式二：命令行**
+### 方式二：命令行一键启用
 ```sh
 git clone https://github.com/ChambersXDU/Arc-Forever.git
 cd Arc-Forever
 
-# 查看状态
-python3 arc_forever.py status
-
-# 应用补丁
+# 启用本地永久补丁
 python3 arc_forever.py apply
-
-# 如需恢复原版
-python3 arc_forever.py restore
 ```
 
-应用完成后，像往常一样正常启动 Arc 即可。
+完成后照常打开 Arc 即可。
 
-## 备份与恢复
+### 常用命令
+```sh
+# 查看当前状态
+python3 arc_forever.py status
 
-工具会在应用补丁时自动将原始文件备份至：  
-`~/Library/Application Support/Arc Forever/Backups`
+# 恢复原始未修改版本
+python3 arc_forever.py restore
 
-运行 `python3 arc_forever.py restore` 即可校验哈希并将应用恢复到修改前的原始状态。
-
-## 注意事项
-
-- **云端服务**：官方服务器停用后，Arc Sync 等依赖云端后端的功能将无法使用，浏览器仅作为本地单机浏览器运行。
-- **钥匙串提示**：由于应用被重新签名，macOS 可能会在首次打开时弹出钥匙串访问提示，选择“始终允许”即可。
-- **内核版本**：本项目旨在保持 Arc 现有功能的本地可用性，不维护或更新底层的 Chromium 内核。
+# 导出侧边栏 Spaces 与置顶标签为书签
+python3 tools/export_sidebar.py --output ./arc-bookmarks
+```
 
 ## 开源许可
 
-本项目基于 [MIT 许可证](LICENSE) 开源。Arc 及相关商标、组件所有权归 The Browser Company 所有。
+本项目基于 [MIT License](LICENSE) 开源。
