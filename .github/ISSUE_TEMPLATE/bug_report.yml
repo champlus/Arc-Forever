@@ -1,0 +1,43 @@
+name: Bug report
+description: Report a patch, restoration, or browser compatibility problem.
+title: '[Bug] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Include only redacted diagnostics. Do not attach your Arc profile, authentication state, cookies, passwords, Keychain contents, or application bundle.
+  - type: input
+    id: environment
+    attributes:
+      label: macOS version, CPU architecture, and SIP state
+      placeholder: macOS version; Apple Silicon or Intel; existing SIP state
+    validations:
+      required: true
+  - type: input
+    id: arc-build
+    attributes:
+      label: Arc version and build
+      placeholder: Version and build from Arc's application information
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Command and steps to reproduce
+      description: Include the Arc Forever revision or release, selected strategy (framework or main), expected result, and observed result.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Redacted diagnostics
+      description: Paste the error and relevant status output. Remove personal paths, account identifiers, and URLs.
+      render: text
+  - type: dropdown
+    id: restore
+    attributes:
+      label: Restoration result
+      options:
+        - Not attempted
+        - Restored successfully
+        - Restore failed

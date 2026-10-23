@@ -1,0 +1,32 @@
+name: Compatibility report
+description: Report reproducible results for a specific Arc build.
+title: '[Compatibility] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please distinguish actual browser observations from harness tests. Do not upload browser profiles, personal authentication state, or Arc binaries.
+  - type: input
+    id: environment
+    attributes:
+      label: macOS version, CPU architecture, SIP state, and Arc Forever revision
+    validations:
+      required: true
+  - type: input
+    id: arc-build
+    attributes:
+      label: Arc version, build, and executable SHA-256
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Observed checks and results
+      description: Include the strategy (framework or main) and results for launch, navigation, Spaces/tabs, restart persistence, fixture sessions/passwords, apply, and restore. Mark untested items explicitly.
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Errors or limitations
+      description: Include only redacted diagnostic output and reproducible steps.
