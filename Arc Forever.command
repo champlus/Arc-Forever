@@ -3,8 +3,8 @@ set -u
 cd -- "$(dirname -- "$0")" || exit 1
 
 if ! command -v python3 >/dev/null 2>&1; then
-    echo 'Arc Forever requires Python 3 and Apple Command Line Tools.'
-    read -r -p 'Press Return to close. ' unused
+    echo "Arc Forever requires Python 3 and Apple Command Line Tools."
+    read -r -p "Press Return to close. " unused
     exit 1
 fi
 
@@ -12,13 +12,20 @@ if [ "$#" -gt 0 ]; then
     exec python3 arc_forever.py "$@"
 fi
 
-echo 'Arc Forever — original Arc, local authentication, reversible patch'
-echo 'Quit Arc before applying or restoring. / 修改或恢复前请退出 Arc。'
-echo '1. Apply / 原地修改'
-echo '2. Restore / 恢复原版'
-echo '3. Status / 查看状态'
-echo '4. Exit / 退出'
-read -r -p 'Choose / 选择 [1-4]: ' choice
+echo "=================================================="
+echo "  Arc Forever — Keep Arc Browser Alive on macOS"
+echo "=================================================="
+python3 arc_forever.py status 2>/dev/null || true
+echo "--------------------------------------------------"
+echo "  Please quit Arc before applying or restoring."
+echo ""
+echo "  1) Apply Patch"
+echo "  2) Restore Original Arc"
+echo "  3) Check Status"
+echo "  4) Exit"
+echo ""
+read -r -p "Select an option [1-4]: " choice
+echo ""
 case "$choice" in
     1) python3 arc_forever.py apply ;;
     2) python3 arc_forever.py restore ;;
@@ -26,5 +33,6 @@ case "$choice" in
     *) exit 0 ;;
 esac
 result=$?
-read -r -p 'Press Return to close / 回车关闭。' unused
+echo ""
+read -r -p "Press Return to close. " unused
 exit "$result"
