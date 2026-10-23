@@ -1,6 +1,6 @@
-# Arc Forever — 让 Arc 浏览器在停服后继续使用（macOS 离线 / 免云端验证）
+# Arc Forever — Make Arc Great Again
 
-**在官方停服与账号下线后，继续在 macOS 上永久使用你的 Arc 浏览器——支持离线运行，完整保留所有 Spaces、置顶标签、扩展与个人配置。**
+在官方停服与账号下线后，继续使用你的 macOS 版 Arc 浏览器——支持离线运行，完整保留所有 Spaces、置顶标签、扩展与个人配置。
 
 [English](README.md) · [兼容性说明](docs/compatibility.md) · [技术原理](docs/architecture.md)
 
@@ -15,8 +15,8 @@
 
 确保系统已安装 Python 3 与 Xcode Command Line Tools（终端运行 `xcode-select --install`），并在操作前退出 Arc。
 
-### 方式一：双击交互运行（推荐）
-下载仓库后，在 Finder 中双击打开 [`Arc Forever.command`](Arc%20Forever.command)，在终端菜单中按数字选择即可完成激活、状态检查或恢复。
+### 方式一：双击运行（推荐）
+下载仓库后，在 Finder 中双击打开 [`Arc Forever.command`](Arc%20Forever.command)，在终端菜单中按数字选择即可完成启用、状态检查或恢复。
 
 ### 方式二：命令行一键启用
 ```sh

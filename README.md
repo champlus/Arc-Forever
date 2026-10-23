@@ -1,6 +1,6 @@
-# Arc Forever — Use Arc Browser Offline & After Shutdown (macOS)
+# Arc Forever — Make Arc Great Again
 
-**Keep using Arc Browser on macOS forever — offline, without cloud login, and with all your Spaces, pinned tabs, extensions, and profile intact.**
+Keep using Arc Browser on macOS after the official shutdown — offline, account-free, with all your Spaces, pinned tabs, extensions, and profile intact.
 
 [简体中文](README.zh-CN.md) · [Compatibility](docs/compatibility.md) · [Architecture](docs/architecture.md)
 

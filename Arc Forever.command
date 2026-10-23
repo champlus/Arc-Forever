@@ -13,7 +13,7 @@ if [ "$#" -gt 0 ]; then
 fi
 
 echo "=================================================="
-echo "  Arc Forever — Keep Arc Browser Alive on macOS"
+echo "  Arc Forever — Make Arc Great Again"
 echo "=================================================="
 python3 arc_forever.py status 2>/dev/null || true
 echo "--------------------------------------------------"
