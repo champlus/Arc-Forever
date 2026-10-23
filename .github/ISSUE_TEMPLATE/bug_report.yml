@@ -1,0 +1,25 @@
+name: Bug report
+description: Report an issue with patching, restoring, or running Arc.
+title: '[Bug] '
+body:
+  - type: input
+    id: environment
+    attributes:
+      label: macOS version & chip
+      placeholder: e.g. macOS 15.7 (Apple Silicon)
+    validations:
+      required: true
+  - type: input
+    id: arc-build
+    attributes:
+      label: Arc version & build
+      placeholder: e.g. Arc 1.170.0 (89123)
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce & output
+      description: Share the command you ran and any error message shown in the terminal.
+    validations:
+      required: true

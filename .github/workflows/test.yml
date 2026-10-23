@@ -1,0 +1,42 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Python tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Build and test local authentication guard
+        shell: bash
+        run: |
+          python3 - <<'PYTEST'
+          import json
+          import os
+          from pathlib import Path
+          import subprocess
+          import tempfile
+
+          with tempfile.TemporaryDirectory(prefix="arc-forever-test-") as temporary:
+              fixture = Path(temporary)
+              library = fixture / "ArcForeverGuard.dylib"
+              harness = fixture / "guard_harness"
+              subprocess.run(["xcrun", "clang", "-fobjc-arc", "-fblocks", "-framework", "Foundation", "tests/guard_harness.m", "-o", str(harness)], check=True)
+              state = fixture / "state.json"
+              state.write_text(json.dumps({"session": {"user": {"id": "test-local-id", "name": "Fixture User", "email": "fixture@example.invalid", "createdAt": 0}}}))
+              environment = dict(os.environ, ARC_FOREVER_STATE_PATH=str(state))
+              for preserve_cloudkit in (0, 1):
+                  subprocess.run(["xcrun", "clang", "-dynamiclib", "-fobjc-arc", "-fblocks", f"-DAF_PRESERVE_CLOUDKIT={preserve_cloudkit}", "-framework", "Foundation", "native/ArcForeverGuard.m", "-o", str(library)], check=True)
+                  subprocess.run([str(harness), str(library)], env=environment, check=True)
+          PYTEST

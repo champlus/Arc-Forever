@@ -1,0 +1,14 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Arc Forever Verification</title>
+<h1>Arc Forever local browsing works</h1>
+<p id="state"></p>
+<button id="counter">Clicks: 0</button>
+<script>
+let clicks = 0;
+document.querySelector('#state').textContent = 'JavaScript executed';
+document.querySelector('#counter').onclick = event => {
+  event.target.textContent = 'Clicks: ' + (++clicks);
+  localStorage.setItem('arc-forever-test', 'persisted');
+};
+</script>

@@ -1,0 +1,25 @@
+name: Compatibility & Version Support
+description: Request support or share test results for an Arc build.
+title: '[Compatibility] '
+body:
+  - type: input
+    id: environment
+    attributes:
+      label: macOS version & chip
+      placeholder: e.g. macOS 15.7 (Apple Silicon)
+    validations:
+      required: true
+  - type: input
+    id: arc-build
+    attributes:
+      label: Arc version & build
+      placeholder: e.g. Arc 1.170.0 (89123)
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Share output from `python3 arc_forever.py status` or your test results.
+    validations:
+      required: true
